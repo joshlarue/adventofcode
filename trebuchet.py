@@ -1,18 +1,9 @@
 input = open("trebuchetinput.txt", "rt")
-
-# line = 1
-# 
-# line.rstrip
-# 
+arrLine = []
 
 for line in input:
     line = line.rstrip()
-    firstChar = False
-    while firstChar == False:
-        for char in line:
-            if char.isnumeric():
-                print(char)
-                firstChar = True
+    arrLine.append(line)
 
-
+print(arrLine)
 input.close()
