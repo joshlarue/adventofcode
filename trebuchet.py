@@ -1,5 +1,6 @@
 input = open("trebuchetinput.txt", "rt")
 arrLine = []
+result = 0
 
 for line in input:
     line = line.rstrip()
@@ -11,13 +12,13 @@ input.close()
 for item in arrLine:
     firstNum = 0
     secondNum = 0
-    localResult = []
+    localResult = ''
     for char in item:
         if char.isnumeric():
             firstNum = char
     for char in reversed(item):
         if char.isnumeric():
             secondNum = char
-    localResult.append(secondNum)
-    localResult.append(firstNum)
+    localResult += secondNum
+    localResult += firstNum
     print(localResult)
