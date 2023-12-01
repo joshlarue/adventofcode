@@ -5,8 +5,6 @@ result = 0
 for line in input:
     line = line.rstrip()
     arrLine.append(line)
-
-print(arrLine)
 input.close()
 
 for item in arrLine:
@@ -21,4 +19,6 @@ for item in arrLine:
             secondNum = char
     localResult += secondNum
     localResult += firstNum
-    print(localResult)
+    result += int(localResult)
+
+print(result)
