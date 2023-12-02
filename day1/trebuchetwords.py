@@ -18,18 +18,25 @@ for item in arrLine:
     firstNum = 0
     secondNum = 0
     localResult = ''
-    for item in arrLine:
-        i = 0
-        for i in range(0, len(item)):
-            threeChunk = item[i:3] # what happens if this goes beyond the end of the string?
-            fourChunk = item[i:4]
-            fiveChunk = item[i:5]
-            if threeChunk in numbers:
-                print(threeChunk)
-            if fourChunk in numbers:
-                print(fourChunk)
-            if fiveChunk in numbers:
-                print(fiveChunk)
+    #for item in arrLine:
+    i = 0
+    for i in range(0, len(item)):
+        if item[i].isdigit():
+            firstNum = item[i]
+            break
+        threeChunk = item[i:3] # what happens if this goes beyond the end of the string?
+        fourChunk = item[i:4]
+        fiveChunk = item[i:5]
+        if threeChunk in numbers:
+            firstNum = numbers[threeChunk]
+            break
+        if fourChunk in numbers:
+            firstNum = numbers[fourChunk]
+            break
+        if fiveChunk in numbers:
+            firstNum = numbers[fiveChunk]
+            break
+    print(firstNum)
     
 
     #localResult += secondNum
