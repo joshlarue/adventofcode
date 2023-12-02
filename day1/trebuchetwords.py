@@ -1,4 +1,4 @@
-input = open("trebuchetinput.txt", "rt")
+input = open("day1/trebuchetinput.txt", "rt")
 arrLine = []
 result = 0
 numbers = {'one':1, 'two':2, 'three':3, 'four':4, 'five':5, 'six':6, 'seven':7, 'eight':8, 'nine':9}
@@ -8,17 +8,10 @@ for line in input:
     arrLine.append(line)
 input.close()
 
-# for item in arrline
-#   loop through the array forwards in 3, 4, and 5 sized chunks
-#       for number in numbers
-#           if number in chunk3
-#               firstNum = numbers[number].value()? idk
-
 for item in arrLine:
+    localResult = ''
     firstNum = 0
     secondNum = 0
-    localResult = ''
-    #for item in arrLine:
     i = 0
     for i in range(0, len(item)):
         if item[i].isdigit():
@@ -37,10 +30,23 @@ for item in arrLine:
             firstNum = numbers[fiveChunk]
             break
     print(firstNum)
+    localResult += str(firstNum)
     
-
-    #localResult += secondNum
-    #localResult += firstNum
-    #result += int(localResult)
-
-#print(result)
+    for i in range(len(item)-1, 0, -1):
+        if item[i].isdigit():
+            firstNum = item[i]
+            break
+        threeChunk = item[i-3:i]
+        fourChunk = item[i-4:i]
+        fiveChunk = item[i-5:i]
+        if threeChunk in numbers:
+            secondNum = numbers[threeChunk]
+            break
+        if fourChunk in numbers:
+            secondNum = numbers[fourChunk]
+            break
+        if fiveChunk in numbers:
+            secondNum = numbers[fiveChunk]
+            break
+    print(secondNum)
+    localResult += str(secondNum)
