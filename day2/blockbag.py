@@ -1,9 +1,6 @@
 numRed = 12
 numGreen = 13
 numBlue = 14
-red = 0
-green = 0
-blue = 0
 input = open("day2/blockbag.txt", "rt")
 
 lineNum = 1
