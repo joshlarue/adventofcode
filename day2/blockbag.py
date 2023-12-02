@@ -30,6 +30,9 @@ for line in input:
                 for char in color:
                     if char.isdigit(): localBlue += char
                 print(localBlue)
-    if not (int(localRed) > numRed) or (int(localGreen) > numGreen) or (int(localBlue) > numBlue):
-        sumID += gameID
+            if localRed == '': localRed = 0
+            if localGreen == '': localGreen = 0
+            if localBlue == '': localBlue = 0
+            if not (int(localRed) > numRed) or (int(localGreen) > numGreen) or (int(localBlue) > numBlue):
+                sumID += gameID
 print(sumID)
