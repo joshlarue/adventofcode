@@ -17,9 +17,9 @@ for item in arrLine:
         if item[i].isdigit():
             firstNum = item[i]
             break
-        threeChunk = item[i:3] # what happens if this goes beyond the end of the string?
-        fourChunk = item[i:4]
-        fiveChunk = item[i:5]
+        threeChunk = item[i:i+3] # what happens if this goes beyond the end of the string?
+        fourChunk = item[i:i+4]
+        fiveChunk = item[i:i+5]
         if threeChunk in numbers:
             firstNum = numbers[threeChunk]
             break
@@ -32,9 +32,9 @@ for item in arrLine:
     print(firstNum)
     localResult += str(firstNum)
     
-    for i in range(len(item)-1, 0, -1):
-        if item[i].isdigit():
-            firstNum = item[i]
+    for i in range(len(item), 0, -1):
+        if item[i-1].isdigit():
+            secondNum = item[i-1]
             break
         threeChunk = item[i-3:i]
         fourChunk = item[i-4:i]
@@ -50,3 +50,5 @@ for item in arrLine:
             break
     print(secondNum)
     localResult += str(secondNum)
+    result += int(localResult)
+print(result)
