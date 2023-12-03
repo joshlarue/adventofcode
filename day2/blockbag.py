@@ -42,3 +42,4 @@ for line in input:
         sumID += gameID
     lineNum += 1
 print(sumID)
+input.close()
