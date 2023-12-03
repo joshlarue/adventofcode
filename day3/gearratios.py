@@ -2,27 +2,22 @@ SPECIAL_CHARS = '!@#$%^&*?/=-_~`\{}[]()<>'
 # or use if not .isalnum()?
 input = open("day3/test.txt", "rt")
 
-def getLineNumList():
-    nums = ''
-    # if width of number +1 or -1 = special char then add
-    for line in input:
-        i = 0
-        for i in range(0, len(line)):
-            if line[i].isdigit() or line[i] in SPECIAL_CHARS:
-                nums += line[i]
-            if line[i] == '.' and line[i-1].isdigit():
-                nums += ' '
-        checkIfBeside(nums)
+twoD = []
 
-def checkIfBeside(list):
-    i = 0
-    for i in range(0, len(list)):
-        if (list[i].isdigit() and list[i-1] in SPECIAL_CHARS) or (list[i].isdigit() and list[i+1] in SPECIAL_CHARS):
-            pass
+for line in input:
+    line = line.rstrip()
+    twoD.append(line)
+print(twoD)
 
-
-
-getLineNumList()
-checkIfBeside()
+i = 0
+j = 0
+for i in range(0, len(twoD[0])):
+    for j in range(0, len(twoD)):
+        # this could probably be done better
+        # keep getting index out of range error when i=9
+        if (twoD[i][j].isdigit() and twoD[i-1][j] in SPECIAL_CHARS) or (twoD[i][j].isdigit() and twoD[i+1][j-1] in SPECIAL_CHARS):
+            print("add!")
+        #j+=1
+    #i+=1
 
 input.close()
