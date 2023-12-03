@@ -31,8 +31,18 @@ for line in input:
         if localBlue == '': localBlue = 0
         # create array of number of colors for each set and loop through to find lowest number
         # will have to be array of just that color
+        #dictIter = {}
+        #dictIter[localRed, localGreen, localBlue] = gameArr, gameArr, gameArr
+        #print(dictIter)
+
         numRed.append(int(localRed))
         numGreen.append(int(localGreen))
         numBlue.append(int(localBlue))
     print(numRed, numGreen, numBlue)
+    numRed.sort()
+    numGreen.sort()
+    numBlue.sort() # NEED TO ACCOUNT FOR 0s
+    print(numRed, numGreen, numBlue)
+    powerOfSet = numRed[0] * numGreen[0] * numBlue[0]
+    print(powerOfSet)
     lineNum += 1
