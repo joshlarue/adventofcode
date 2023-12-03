@@ -46,3 +46,4 @@ for line in input:
     powerOfSet = numRed[0] * numGreen[0] * numBlue[0]
     print(powerOfSet)
     lineNum += 1
+input.close()
