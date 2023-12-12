@@ -59,17 +59,21 @@ def setGalaxyNums(rows):
         numberedGalaxies.append(''.join(numberedLine))
     return numberedGalaxies
 
-def findClosest(rows, coordinates, shortestPaths):
+def findClosest(coordinates):
+    shortestPaths = 0
     for i in range(len(coordinates)-1):
         currentX = coordinates[i][0]
         currentY = coordinates[i][1]
-        nextX = coordinates[i+1][0]
-        nextY = coordinates[i+1][1]
-        print(currentX, currentY, nextX, nextY)
-        pathX = abs(nextX - currentX)
-        pathY = abs(nextY - currentY)
-        pathLength = pathX + pathY
-        print(pathLength)
+        for j in range(len(coordinates)-1):
+            nextX = coordinates[j+1][0]
+            nextY = coordinates[j+1][1]
+            print(currentX, currentY, nextX, nextY)
+            pathX = abs(nextX - currentX)
+            pathY = abs(nextY - currentY)
+            pathLength = pathX + pathY
+            print(pathLength)
+            shortestPaths += pathLength
+    return shortestPaths
         
 
 def main():
@@ -79,7 +83,6 @@ def main():
     openColumns = []
     rows = []
     numRows, numColumns = getSize()
-    shortestPaths = {}
     
     input = open('day11/test.txt', 'rt')
     for row in input:
@@ -93,12 +96,14 @@ def main():
     insertColumns(rows, openColumns)
     getGalaxies(rows, coordinates)
     setGalaxyNums(rows)
-    findClosest(rows, coordinates, shortestPaths)
+    findClosest(coordinates)
+    shortestPaths = findClosest(coordinates)
 
 
     print(coordinates)
     print(openColumns)
     print(openRows)
+    print(shortestPaths)
     for row in rows:
         print(row)
 
