@@ -8,13 +8,9 @@ def getSize():
             numColumns += 1
     return numRows, numColumns
 
-def getGalaxiesAndOpenColumns(rows, coordinates, openColumns):
+def getOpenColumns(rows, openColumns):
     for i, item in enumerate(rows):
         prevSpace = True
-
-        for j, char in enumerate(item):
-            if char in '#':
-                coordinates.append((i, j))
 
         if item[i] == '.':
             for n, blank in enumerate(rows):
@@ -24,6 +20,14 @@ def getGalaxiesAndOpenColumns(rows, coordinates, openColumns):
                     prevSpace = False
         if prevSpace == True:
             openColumns.append(i)
+    return openColumns
+
+def getGalaxies(rows, coordinates):
+    for i, items in enumerate(rows):
+        for j, char in enumerate(items):
+            if char in '#':
+                coordinates.append((i, j))
+    return coordinates
 
 def insertColumns(rows, openColumns):
     colOffset = 0
@@ -55,6 +59,18 @@ def setGalaxyNums(rows):
         numberedGalaxies.append(''.join(numberedLine))
     return numberedGalaxies
 
+def findClosest(rows, coordinates, shortestPaths):
+    for i, coord in enumerate(coordinates):
+        currentX = coord[0]
+        currentY = coord[1]
+        nextX = coordinates[i+1][0]
+        nextY = coordinates[i+1][1]
+        print(currentX, currentY, nextX, nextY)
+        pathX = abs(nextX - currentX)
+        pathY = abs(nextY - currentY)
+        pathLength = pathX + pathY
+        print(pathLength)
+        
 
 def main():
     input = open('day11/test.txt', 'rt')
@@ -63,18 +79,22 @@ def main():
     openColumns = []
     rows = []
     numRows, numColumns = getSize()
+    shortestPaths = {}
     
     input = open('day11/test.txt', 'rt')
     for row in input:
         row = row.rstrip()
         rows.append(row)
+    input.close()
 
-    getGalaxiesAndOpenColumns(rows, coordinates, openColumns)
+    getOpenColumns(rows, openColumns)
     getOpenRows(rows, openRows)
     insertRows(rows, openRows, numColumns)
     insertColumns(rows, openColumns)
-    rows = setGalaxyNums(rows)
-    input.close()
+    getGalaxies(rows, coordinates)
+    setGalaxyNums(rows)
+    findClosest(rows, coordinates, shortestPaths)
+
 
     print(coordinates)
     print(openColumns)
