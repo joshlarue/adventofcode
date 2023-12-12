@@ -25,12 +25,14 @@ def getGalaxiesAndOpenColumns(rows, coordinates, openColumns):
         if prevSpace == True:
             openColumns.append(i)
 
-def insertColumns(rows, openColumns, numColumns):
+def insertColumns(rows, openColumns):
+    colOffset = 0
     for i in range(0, len(openColumns)):
         for j, row in enumerate(rows):
             colToInsert = rows[j]
-            newCol = colToInsert[:openColumns[i]+2] + '*' + colToInsert[openColumns[i]+2:]
+            newCol = colToInsert[:openColumns[i]+colOffset] + '.' + colToInsert[openColumns[i]+colOffset:]
             rows[j] = newCol
+        colOffset += 1
 
 def getOpenRows(rows, openRows):
     for i, row in enumerate(rows):
@@ -39,7 +41,20 @@ def getOpenRows(rows, openRows):
     
 def insertRows(rows, openRows, numColumns):
     for i in range(0, len(openRows)):
-        rows.insert(openRows[i]+1, '*'*numColumns)
+        rows.insert(openRows[i]+1, '.'*numColumns)
+
+def setGalaxyNums(rows):
+    numberedGalaxies = []
+    galaxyNum = 1
+    for i, row in enumerate(rows):
+        numberedLine = list(row)
+        for j, char in enumerate(numberedLine):
+            if char == '#':
+                numberedLine[j] = f'{galaxyNum}'
+                galaxyNum += 1
+        numberedGalaxies.append(''.join(numberedLine))
+    return numberedGalaxies
+
 
 def main():
     input = open('day11/test.txt', 'rt')
@@ -57,7 +72,8 @@ def main():
     getGalaxiesAndOpenColumns(rows, coordinates, openColumns)
     getOpenRows(rows, openRows)
     insertRows(rows, openRows, numColumns)
-    insertColumns(rows, openColumns, numColumns)
+    insertColumns(rows, openColumns)
+    rows = setGalaxyNums(rows)
     input.close()
 
     print(coordinates)
