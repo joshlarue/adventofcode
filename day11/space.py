@@ -60,9 +60,9 @@ def setGalaxyNums(rows):
     return numberedGalaxies
 
 def findClosest(rows, coordinates, shortestPaths):
-    for i, coord in enumerate(coordinates):
-        currentX = coord[0]
-        currentY = coord[1]
+    for i in range(len(coordinates)-1):
+        currentX = coordinates[i][0]
+        currentY = coordinates[i][1]
         nextX = coordinates[i+1][0]
         nextY = coordinates[i+1][1]
         print(currentX, currentY, nextX, nextY)
