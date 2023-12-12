@@ -1,5 +1,5 @@
 def getSize():
-    input = open('day11/test.txt', 'rt')
+    input = open('day11/input.txt', 'rt')
     numRows = 0
     numColumns = 0
     for line in input:
@@ -83,14 +83,13 @@ def findClosest(coordinates):
         
 
 def main():
-    input = open('day11/test.txt', 'rt')
     coordinates = []
     openRows = []
     openColumns = []
     rows = []
     numRows, numColumns = getSize()
     
-    input = open('day11/test.txt', 'rt')
+    input = open('day11/input.txt', 'rt')
     for row in input:
         row = row.rstrip()
         rows.append(row)
