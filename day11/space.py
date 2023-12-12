@@ -61,18 +61,24 @@ def setGalaxyNums(rows):
 
 def findClosest(coordinates):
     shortestPaths = 0
+    numPairs = 0
+    usedCoords = []
     for i in range(len(coordinates)-1):
         currentX = coordinates[i][0]
         currentY = coordinates[i][1]
         for j in range(len(coordinates)-1):
             nextX = coordinates[j+1][0]
             nextY = coordinates[j+1][1]
-            print(currentX, currentY, nextX, nextY)
-            pathX = abs(nextX - currentX)
-            pathY = abs(nextY - currentY)
-            pathLength = pathX + pathY
-            print(pathLength)
-            shortestPaths += pathLength
+            if numPairs <= ((len(coordinates)-1)*(len(coordinates)))/2 and (currentX, currentY, nextX, nextY) not in usedCoords:
+                print(currentX, currentY, nextX, nextY)
+                pathX = abs(nextX - currentX)
+                pathY = abs(nextY - currentY)
+                pathLength = pathX + pathY
+                print(pathLength)
+                shortestPaths += pathLength
+                numPairs += 1
+                usedCoords.append((currentX, currentY, nextX, nextY))
+    print(numPairs)
     return shortestPaths
         
 
@@ -96,7 +102,6 @@ def main():
     insertColumns(rows, openColumns)
     getGalaxies(rows, coordinates)
     setGalaxyNums(rows)
-    findClosest(coordinates)
     shortestPaths = findClosest(coordinates)
 
 
