@@ -8,21 +8,7 @@ def getSize():
             numColumns += 1
     return numRows, numColumns
 
-
-
-
-def main():
-    input = open('day11/test.txt', 'rt')
-    coordinates = []
-    lineYN = []
-    rows = []
-    numRows, numColumns = getSize()
-    
-    input = open('day11/test.txt', 'rt')
-    for row in input:
-        row = row.rstrip()
-        rows.append(row)
-
+def getGalaxiesAndOpenColumns(rows, coordinates, openColumns):
     for i, item in enumerate(rows):
         prevSpace = True
 
@@ -37,12 +23,33 @@ def main():
                 else:
                     prevSpace = False
         if prevSpace == True:
-            lineYN.append(i)
-                    
+            openColumns.append(i)
+
+def getOpenRows(rows, openRows):
+    for i, row in enumerate(rows):
+        if not '#' in row:
+            openRows.append(i)
+
+def main():
+    input = open('day11/test.txt', 'rt')
+    coordinates = []
+    openRows = []
+    openColumns = []
+    rows = []
+    numRows, numColumns = getSize()
+    
+    input = open('day11/test.txt', 'rt')
+    for row in input:
+        row = row.rstrip()
+        rows.append(row)
+
+    getGalaxiesAndOpenColumns(rows, coordinates, openColumns)
+    getOpenRows(rows, openRows)
     input.close()
 
     print(coordinates)
-    print(lineYN)
+    print(openColumns)
+    print(openRows)
 
 
 
