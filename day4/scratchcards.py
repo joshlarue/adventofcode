@@ -1,12 +1,17 @@
 nums = []
+nums2 = []
 input = open('day4/input.txt', 'rt')
 for line in input:
-    nums.append(line.rstrip().split(' '))
+    nums, nums2 = line.rstrip().split('|')
+    
 
 for i, item in enumerate(nums):
-    for iter, num in enumerate(item):
-        if num == '' or num == '|':
-            item.pop(iter)
-    nums[i] = item[2:]
+    for j, num in enumerate(item):
+        if num == '':
+            item.pop(j)
 
-print(nums)
+    nums[i] = item[2:]
+    tempFirstNums = nums[i][10:]
+    tempSecondNums = nums[i][:25]
+    if tempSecondNums in tempFirstNums:
+        print('here')
