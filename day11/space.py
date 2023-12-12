@@ -69,7 +69,7 @@ def findClosest(coordinates):
         for j in range(len(coordinates)-1):
             nextX = coordinates[j+1][0]
             nextY = coordinates[j+1][1]
-            if numPairs <= ((len(coordinates)-1)*(len(coordinates)))/2 and (currentX, currentY, nextX, nextY) not in usedCoords:
+            if numPairs < ((len(coordinates)-1)*(len(coordinates)))/2 and (currentX, currentY) != (nextX, nextY):
                 print(currentX, currentY, nextX, nextY)
                 pathX = abs(nextX - currentX)
                 pathY = abs(nextY - currentY)
