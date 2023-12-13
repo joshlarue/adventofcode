@@ -1,4 +1,10 @@
 def getSize(rows):
+    """
+    Counts the number of string in the rows list and counts characters in the strings
+
+    Inputs: rows list
+    Returns: number of rows, number of columns
+    """
     numRows = 0
     for line in rows:
         numRows += 1
@@ -7,6 +13,14 @@ def getSize(rows):
     return numRows, numColumns
 
 def getOpenColumns(rows, openColumns):
+    """
+    Iterates through the rows list string characters. If they are . (space) then
+        traverses through the columns using another iterator and if they are all . (space)
+        then appends the column number to the openColumns list
+
+    Input: rows list, openColumns list
+    Returns: openColumns with appended columns if applicable
+    """
     for i, item in enumerate(rows):
         prevSpace = True
 
@@ -21,6 +35,13 @@ def getOpenColumns(rows, openColumns):
     return openColumns
 
 def getGalaxies(rows, coordinates):
+    """
+    Iterates through the rows list string characters. If the char is # (galaxy),
+        appends that coordinate to the coordinates list
+
+    Input: rows list, coordinates list
+    Returns: coordinates list with appended galaxy coordinates
+    """
     for i, items in enumerate(rows):
         for j, char in enumerate(items):
             if char in '#':
@@ -28,6 +49,12 @@ def getGalaxies(rows, coordinates):
     return coordinates
 
 def insertColumns(rows, openColumns):
+    """
+    Iterates through the openColumns and rows lists to insert a column . (space) for each row
+
+    Inputs: rows and openColumns lists
+    Returns: none
+    """
     colOffset = 0
     for i in range(0, len(openColumns)):
         for j, row in enumerate(rows):
@@ -37,11 +64,25 @@ def insertColumns(rows, openColumns):
         colOffset += 1
 
 def getOpenRows(rows, openRows):
+    """
+    Iterates through each row strings and if no # (galaxy) is discovered, append
+        the row's coordinates to the openRows list
+
+    Inputs: rows and openRows lists
+    Returns: none
+    """
     for i, row in enumerate(rows):
         if not '#' in row:
             openRows.append(i)
     
 def insertRows(rows, openRows, numColumns):
+    """
+    Iterates through the openRows list to find the correct index to insert space.
+        Inserts a row of . (space) at the found index
+
+    Inputs: rows, openRows, and numColumns list
+    Returns: none
+    """
     for i in range(0, len(openRows)):
         rows.insert(openRows[i]+1, '.'*numColumns)
 
@@ -70,7 +111,7 @@ def findClosest(coordinates):
             nextX = coordinates[j+1][0]
             nextY = coordinates[j+1][1]
             sortedCoords = sorted([currentX, currentY, nextX, nextY])
-            if iPairs < numPairs and (currentX, currentY) != (nextX, nextY) and sortedCoords not in usedCoords:
+            if iPairs <= numPairs and (currentX, currentY) != (nextX, nextY) and sortedCoords not in usedCoords:
                 pathX = abs(nextX - currentX)
                 pathY = abs(nextY - currentY)
                 print(f'{nextX:<4d} - {currentX:3d} == {pathX:3d}')
@@ -91,7 +132,7 @@ def main():
     openColumns = []
     rows = []
 
-    input = open('day11/test.txt', 'rt')
+    input = open('day11/input.txt', 'rt')
     for row in input:
         row = row.rstrip()
         rows.append(row)
