@@ -1,12 +1,9 @@
-def getSize():
-    input = open('day11/input.txt', 'rt')
+def getSize(rows):
     numRows = 0
-    numColumns = 0
-    for line in input:
+    for line in rows:
         numRows += 1
         for numColumns in range(0, len(line)):
             numColumns += 1
-    input.close()
     return numRows, numColumns
 
 def getOpenColumns(rows, openColumns):
@@ -93,14 +90,14 @@ def main():
     openRows = []
     openColumns = []
     rows = []
-    numRows, numColumns = getSize()
-    
-    input = open('day11/input.txt', 'rt')
+
+    input = open('day11/test.txt', 'rt')
     for row in input:
         row = row.rstrip()
         rows.append(row)
     input.close()
 
+    numRows, numColumns = getSize(rows)
     getOpenColumns(rows, openColumns)
     getOpenRows(rows, openRows)
     insertRows(rows, openRows, numColumns)
