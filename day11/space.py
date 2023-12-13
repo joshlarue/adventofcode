@@ -87,6 +87,14 @@ def insertRows(rows, openRows, numColumns):
         rows.insert(openRows[i]+1, '.'*numColumns)
 
 def setGalaxyNums(rows):
+    """
+    Iterates through the rows list and if a # (galaxy) is found, change the galaxy
+        to its correctly ordered number.
+        Not needed to run the program, but helpful for debugging.
+
+    Inputs: rows list
+    Returns: numberedGalaxies list
+    """
     numberedGalaxies = []
     galaxyNum = 1
     for i, row in enumerate(rows):
@@ -99,6 +107,15 @@ def setGalaxyNums(rows):
     return numberedGalaxies
 
 def findClosest(coordinates):
+    """
+    Iterates through the coordinates list to find the current and next coordinates listed.
+        If the number of pairs iterated is less than          ---(or equal to----maybe. Logic needs to be checked)
+        the total number of calculated pairs, calculate path lengths. Prints out results
+        and uses the usedCoords list to keep track of already used pairs.
+
+    Inputs: coordinates list
+    Returns: shortestPaths, the total number of shortest paths between all pairs
+    """
     shortestPaths = 0
     numPairs = 0
     usedCoords = []
@@ -132,7 +149,7 @@ def main():
     openColumns = []
     rows = []
 
-    input = open('day11/input.txt', 'rt')
+    input = open('day11/test.txt', 'rt')
     for row in input:
         row = row.rstrip()
         rows.append(row)
@@ -144,7 +161,8 @@ def main():
     insertRows(rows, openRows, numColumns)
     insertColumns(rows, openColumns)
     getGalaxies(rows, coordinates)
-    setGalaxyNums(rows)
+    # Optional, not needed. Helpful for debugging
+    # rows = setGalaxyNums(rows)
     shortestPaths = findClosest(coordinates)
 
 
@@ -152,6 +170,9 @@ def main():
     print(openColumns)
     print(openRows)
     print(shortestPaths)
+
+    for row in rows:
+        print(row)
 
 
 
