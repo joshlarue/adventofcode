@@ -6,6 +6,7 @@ def getSize():
         numRows += 1
         for numColumns in range(0, len(line)):
             numColumns += 1
+    input.close()
     return numRows, numColumns
 
 def getOpenColumns(rows, openColumns):
@@ -69,7 +70,7 @@ def findClosest(coordinates):
         for j in range(len(coordinates)-1):
             nextX = coordinates[j+1][0]
             nextY = coordinates[j+1][1]
-            if numPairs < ((len(coordinates)-1)*(len(coordinates)))/2 and (currentX, currentY) != (nextX, nextY):
+            if numPairs < ((len(coordinates)-1)*(len(coordinates)))/2 and (currentX, currentY) != (nextX, nextY) and sorted([currentX, currentY, nextX, nextY]) not in usedCoords:
                 print(currentX, currentY, nextX, nextY)
                 pathX = abs(nextX - currentX)
                 pathY = abs(nextY - currentY)
@@ -77,7 +78,7 @@ def findClosest(coordinates):
                 print(pathLength)
                 shortestPaths += pathLength
                 numPairs += 1
-                usedCoords.append((currentX, currentY, nextX, nextY))
+                usedCoords.append(sorted([currentX, currentY, nextX, nextY]))
     print(numPairs)
     return shortestPaths
         
