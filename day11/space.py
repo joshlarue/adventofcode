@@ -64,22 +64,27 @@ def findClosest(coordinates):
     shortestPaths = 0
     numPairs = 0
     usedCoords = []
+    numPairs = (len(coordinates)-1)*(len(coordinates))
+    iPairs = 0
     for i in range(len(coordinates)-1):
         currentX = coordinates[i][0]
         currentY = coordinates[i][1]
         for j in range(len(coordinates)-1):
             nextX = coordinates[j+1][0]
             nextY = coordinates[j+1][1]
-            if numPairs < ((len(coordinates)-1)*(len(coordinates)))/2 and (currentX, currentY) != (nextX, nextY) and sorted([currentX, currentY, nextX, nextY]) not in usedCoords:
-                print(currentX, currentY, nextX, nextY)
+            sortedCoords = sorted([currentX, currentY, nextX, nextY])
+            if iPairs < numPairs and (currentX, currentY) != (nextX, nextY) and sortedCoords not in usedCoords:
                 pathX = abs(nextX - currentX)
                 pathY = abs(nextY - currentY)
+                print(f'{nextX:<4d} - {currentX:3d} == {pathX:3d}')
+                print(f'{nextY:<4d} - {currentY:3d} == {pathY:3d}')
                 pathLength = pathX + pathY
-                print(pathLength)
+                print(f'Path Length is {pathLength}')
+                print(f'Sum of path lengths is {shortestPaths}')
                 shortestPaths += pathLength
-                numPairs += 1
-                usedCoords.append(sorted([currentX, currentY, nextX, nextY]))
-    print(numPairs)
+                iPairs += 1
+                usedCoords.append(sortedCoords)
+    print(iPairs)
     return shortestPaths
         
 
@@ -109,8 +114,6 @@ def main():
     print(openColumns)
     print(openRows)
     print(shortestPaths)
-    for row in rows:
-        print(row)
 
 
 
